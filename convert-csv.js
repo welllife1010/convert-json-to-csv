@@ -8,7 +8,22 @@ async function jsonToCsv(jsonFileName) {
     // Parse the JSON data
     const products = JSON.parse(data);
 
+    //console.log("DEBUG: Sample JSON Data:", JSON.stringify(products.slice(0, 5), null, 2));
+    //console.log("DEBUG: Sample Additional Info:", products.slice(0, 3).map(p => p.additional_info));
+
     const csvFileName = `${jsonFileName.split(".json")[0]}.csv`;
+
+    // Ensure additional_info remains a single string column before converting to CSV
+    // products.forEach(product => {
+    //   if (typeof product.additional_info === "object") {
+    //     product.additional_info = JSON.stringify(product.additional_info); // Ensure it's a single string
+    //   }
+      
+    //   // 🔹 Ensure additional_info is enclosed in double quotes before converting to CSV
+    //   if (typeof product.additional_info === "string") {
+    //     product.additional_info = `"${product.additional_info.replace(/"/g, '""')}"`; // Escape double quotes
+    //   }
+    // });
 
     // Save a CSV chunk
     const saveCsvChunk = async (chunk, index) => {

@@ -1,5 +1,6 @@
 const fs = require("fs");
-const jsonToCsv = require("./convert-csv.js");
+//const jsonToCsv = require("./convert-csv.js");
+const jsonToCsv = require("./convert-csv-json2csv.js");
 
 async function createNewJsonAndCsv( inputJsonFile, outputJsonFileName ) {
 
@@ -94,14 +95,13 @@ async function createNewJsonAndCsv( inputJsonFile, outputJsonFileName ) {
       !param.ParameterText.toLowerCase().includes("digikey")
     );
 
-    // 2a - Add additional info column
+    // 2a - Add each parameter to the baseData object
     filteredParameters.forEach((param) => {
       baseData[`${param.ParameterText}`] = param.ValueText;
     });
 
 
     // 2b - Add additional info column
-    
     const additionalInfo = {
       additional_info: filteredParameters
         .map((param, index) => 
